@@ -1,0 +1,94 @@
+[
+  {
+    "Index": 0,
+    "Name": "공조기",
+    "DetailedPracticeResults": [
+      {
+        "Name": "평가 항목 1",
+        "Content": "평가 내용 1"
+      },
+      {
+        "Name": "평가 항목 2",
+        "Content": "평가 내용 2"
+      },
+      {
+        "Name": "평가 항목 3",
+        "Content": "평가 내용 3"
+      },
+      {
+        "Name": "평가 항목 4",
+        "Content": "평가 내용 4"
+      },
+      {
+        "Name": "평가 항목 5",
+        "Content": "평가 내용 5"
+      }
+    ]
+  },
+  {
+    "Index": 1,
+    "Name": "급기/환기 팬",
+    "DetailedPracticeResults": [
+      {
+        "Name": "평가 항목 1",
+        "Content": "평가 내용 1"
+      },
+      {
+        "Name": "평가 항목 2",
+        "Content": "평가 내용 2"
+      },
+      {
+        "Name": "평가 항목 3",
+        "Content": "평가 내용 3"
+      }
+    ]
+  },
+  {
+    "Index": 2,
+    "Name": "3Way 밸브",
+    "DetailedPracticeResults": {
+      "Name": "평가 항목 1",
+      "Content": "평가 내용 1"
+    }
+  },
+  {
+    "Index": 3,
+    "Name": "댐퍼",
+    "DetailedPracticeResults": {
+      "Name": "평가 항목 1",
+      "Content": "평가 내용 1"
+    }
+  },
+  {
+    "Index": 4,
+    "Name": "차압계",
+    "DetailedPracticeResults": {
+      "Name": "평가 항목 1",
+      "Content": "평가 내용 1"
+    }
+  },
+  {
+    "Index": 5,
+    "Name": "온도센서",
+    "DetailedPracticeResults": {
+      "Name": "평가 항목 1",
+      "Content": "평가 내용 1"
+    }
+  },
+  {
+    "Index": 6,
+    "Name": "필터",
+    "DetailedPracticeResults": {
+      "Name": "평가 항목 1",
+      "Content": "평가 내용 1"
+    }
+  },
+  {
+    "Index": 7,
+    "Name": "냉/난방 코일",
+    "DetailedPracticeResults": {
+      "Name": "평가 항목 1",
+      "Content": "평가 내용 1"
+    }
+  }
+]

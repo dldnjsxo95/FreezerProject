@@ -1,0 +1,11 @@
+[
+	{
+		"Index": 0,
+		"EventId": 3,
+		"Narration": "보일러 설비 점검을 위해 필요한 점검 도구를 선택해주세요.\n도구 선택이 완료되면 교육 장소로 이동합니다.",
+		"NarrationClipPath": null,
+		"TooltipIndex": [
+			0
+		]
+	}
+]

@@ -1,0 +1,16 @@
+[
+  {
+    "Index": 0,
+    "EventId": 1,
+    "Narration": "설비의 위치를 파악했다면 해당 설비 위치로 이동해주세요.",
+    "NarrationClipPath": null,
+    "TooltipIndex": null
+  },
+  {
+    "Index": 1,
+    "EventId": 2,
+    "Narration": "이 교육은 보일러 점검 훈련입니다.\n교육 과정에는 설비 점검, 일상 점검 훈련이 있습니다. 원하시는 교육 과정을 선택하세요.",
+    "NarrationClipPath": null,
+    "TooltipIndex": null
+  }
+]
