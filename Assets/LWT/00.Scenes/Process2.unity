@@ -3591,6 +3591,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76b15e84a3dd2f94c8d8cce03532ec10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toggle: {fileID: 0}
+  selectedSprite: {fileID: 0}
+  unSelectedSprite: {fileID: 0}
+  image: {fileID: 0}
+  dragItemTr: {fileID: 0}
+  dragItemImage: {fileID: 0}
+  itemSprite: {fileID: 0}
 --- !u!114 &192409751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7887,6 +7894,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dd58cccf35439640b3b0db1af955534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slider: {fileID: 0}
+  valueText: {fileID: 0}
+  startValue: 0
 --- !u!1 &419729334
 GameObject:
   m_ObjectHideFlags: 0
@@ -11533,6 +11543,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76b15e84a3dd2f94c8d8cce03532ec10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toggle: {fileID: 0}
+  selectedSprite: {fileID: 0}
+  unSelectedSprite: {fileID: 0}
+  image: {fileID: 0}
+  dragItemTr: {fileID: 0}
+  dragItemImage: {fileID: 0}
+  itemSprite: {fileID: 0}
 --- !u!114 &601309923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13568,6 +13585,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dd58cccf35439640b3b0db1af955534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slider: {fileID: 0}
+  valueText: {fileID: 0}
+  startValue: 0
 --- !u!1 &742668596
 GameObject:
   m_ObjectHideFlags: 0
@@ -28342,6 +28362,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76b15e84a3dd2f94c8d8cce03532ec10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toggle: {fileID: 0}
+  selectedSprite: {fileID: 0}
+  unSelectedSprite: {fileID: 0}
+  image: {fileID: 0}
+  dragItemTr: {fileID: 0}
+  dragItemImage: {fileID: 0}
+  itemSprite: {fileID: 0}
 --- !u!114 &1310968712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33013,6 +33040,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dd58cccf35439640b3b0db1af955534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slider: {fileID: 0}
+  valueText: {fileID: 0}
+  startValue: 0
 --- !u!1 &1592180122
 GameObject:
   m_ObjectHideFlags: 0
@@ -34158,6 +34188,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76b15e84a3dd2f94c8d8cce03532ec10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toggle: {fileID: 0}
+  selectedSprite: {fileID: 0}
+  unSelectedSprite: {fileID: 0}
+  image: {fileID: 0}
+  dragItemTr: {fileID: 0}
+  dragItemImage: {fileID: 0}
+  itemSprite: {fileID: 0}
 --- !u!114 &1697707720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43309,6 +43346,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dd58cccf35439640b3b0db1af955534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slider: {fileID: 0}
+  valueText: {fileID: 0}
+  startValue: 0
 --- !u!1 &2079559099
 GameObject:
   m_ObjectHideFlags: 0

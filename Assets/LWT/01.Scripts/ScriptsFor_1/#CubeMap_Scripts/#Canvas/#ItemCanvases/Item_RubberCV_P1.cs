@@ -66,7 +66,7 @@ public class Item_RubberCV_P1 : ItemCV_P1
 
 	public void OnClickRubberBtn( Vector3 position )
 	{
-		GameObject rubberGo =  Instantiate(rubber.gameObject , GroundInstall_CV_P1.SpawnedItemsHolder);
+		GameObject rubberGo =  Instantiate(rubber.pref , GroundInstall_CV_P1.SpawnedItemsHolder);
 
 		rubberGo.transform.position = position;
 		rubberGo.transform.localRotation = Quaternion.Euler(new Vector3(-90, 0, 0));
@@ -91,6 +91,7 @@ public class Item_RubberCV_P1 : ItemCV_P1
 	public class Rubber
 	{
 		public GameObject gameObject;
+		public GameObject pref; 
 		public Vector3 startPos;
 		public Vector3 rotation;
 		public Vector3 size;

@@ -5,14 +5,9 @@ using System.Linq;
 
 public class ItemChooseManager_P1 : MonoBehaviour
 {
-	Item_P1[] item_P1s;
+	public Item_P1[] item_P1s;
 
 	public Item_P1 ChoosenItem { get; set; } = null;
-
-	private void Awake()
-	{
-		item_P1s = GetComponentsInChildren<Item_P1>(true);
-	}
 
 	private void OnEnable()
 	{
