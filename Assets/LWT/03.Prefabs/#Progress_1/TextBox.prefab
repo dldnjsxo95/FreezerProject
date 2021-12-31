@@ -970,6 +970,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4356e105c0cb7ef4ebed7153d41b13a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 0
   inPos: {x: 0, y: -488.0759, z: 0}
   outPos: {x: 0, y: -948, z: 0}
 --- !u!114 &7706040400776509133
@@ -989,6 +990,8 @@ MonoBehaviour:
   items: []
   textBox_Txt: {fileID: 340202973162534541}
   contents: []
+  moveObject: {fileID: 0}
+  fadeObject: {fileID: 0}
 --- !u!1 &7818287000698959122
 GameObject:
   m_ObjectHideFlags: 0

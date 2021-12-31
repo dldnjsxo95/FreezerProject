@@ -20,6 +20,12 @@ public class CamRotate : PlayerScript
 		mx = transform.eulerAngles.y;
 	}
 
+	private void Start()
+	{
+		my = -transform.eulerAngles.x;
+		mx = transform.eulerAngles.y;
+	}
+
 	void Update()
 	{
 		if (!Input.GetMouseButton((int)mouseInput)) return;

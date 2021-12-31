@@ -32,6 +32,7 @@ public class GameManagerP1 : MonoBehaviour
 		StartEvent += () => groundLine.SetActive(false);
 		StartEvent += () => StartCoroutine(StartRoutine());
 		StartEvent += () => building.SetActive(false);
+		StartEvent += () => Camera.main.transform.localRotation = Quaternion.Euler(new Vector3(0, 90, 0)); 
 	}
 
 	private void Start()

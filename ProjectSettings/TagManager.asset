@@ -9,8 +9,8 @@ TagManager:
   - MainCV
   - Human
   - Button
-  - RulerCheckBox
   - Item
+  - AlignerCheckBox
   layers:
   - Default
   - TransparentFX

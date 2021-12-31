@@ -75,11 +75,11 @@ public class CamManagement_P1 : MonoBehaviour
 
 		float angleOffSet = Vector3.Angle(playerCam.forward, curTarget.playerLookAtPos.position - playerCam.position);
 
-		while (angleOffSet > 0.1f)
+		while (angleOffSet > 0.4f)
 		{
 			angleOffSet = Vector3.Angle(playerCam.forward, curTarget.playerLookAtPos.position - playerCam.position);
 
-			playerCam.forward = Vector3.Lerp(playerCam.forward, curTarget.playerLookAtPos.position - playerCam.position, Time.deltaTime / 2);
+			playerCam.forward = Vector3.Lerp(playerCam.forward, 5*(curTarget.playerLookAtPos.position - playerCam.position).normalized, Time.deltaTime / 2);
 
 			yield return null;
 		}
