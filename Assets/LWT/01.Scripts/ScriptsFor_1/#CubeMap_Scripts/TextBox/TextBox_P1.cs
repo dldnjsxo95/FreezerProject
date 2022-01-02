@@ -21,7 +21,7 @@ public class TextBox_P1 : MonoBehaviour
 	[HideInInspector] public MoveObject moveObject;
 	[HideInInspector] public FadeObject fadeObject;
 
-	int txtIdx;
+	int txtIdx = 0;
 	int TxtIdx
 	{
 		get { return txtIdx; }
@@ -31,9 +31,11 @@ public class TextBox_P1 : MonoBehaviour
 
 			if (txtIdx == 0)
 				prevBtn.interactable = false;
-			else if (txtIdx == contents.Length - 1)
+
+			if (txtIdx == contents.Length - 1)
 				nextBtn.interactable = false;
-			else
+
+			if (txtIdx != 0 && txtIdx != contents.Length - 1)
 			{
 				prevBtn.interactable = true;
 				nextBtn.interactable = true;
@@ -48,6 +50,8 @@ public class TextBox_P1 : MonoBehaviour
 
 		moveObject = GetComponent<MoveObject>();
 		fadeObject = GetComponent<FadeObject>();
+
+		TxtIdx = 0;
 	}
 
 	private void OnEnable()

@@ -8,6 +8,7 @@ public enum TargetTag_P1
 	NoneUse,
 	Installation_Preview,
 	GroundView,
+	RefrigerIn,
 }
 
 public class CamManagement_P1 : MonoBehaviour
@@ -20,7 +21,7 @@ public class CamManagement_P1 : MonoBehaviour
 	public Transform playerCam;
 	[Tooltip("Time it takes arrive to target")]
 	public float duration = 2f;
-	public bool IsFinishCamMove { get; set; }
+	public bool IsFinishCamMove { get; set; } = true;
 
 	[Header("Target Setting")]
 	public List<CamTarget> camTargets = new List<CamTarget>();

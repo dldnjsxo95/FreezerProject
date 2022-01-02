@@ -28,8 +28,6 @@ public class StudyPanel_P3 : MonoBehaviour
         PlayerEvent.Instance.playerMove.enabled = false;
         PlayerEvent.Instance.camRotate.enabled = false;
 
-        CamManagement.Instance.MoveTo(TargetTag.Turbo_RefrigCondenser);
-
         textBox.SetActive(true);
     }
 }

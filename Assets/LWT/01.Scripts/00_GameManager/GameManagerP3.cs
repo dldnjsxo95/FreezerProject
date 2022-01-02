@@ -10,7 +10,9 @@ public class GameManagerP3 : MonoBehaviour
 
 	[Header("Canvas Setting")]
 	public FadeObject titleFO;
-	public FadeObject startFO;
+	public GameObject items_01;
+	public TextBox_P3 mainText_01;
+
 
 	private void Awake()
 	{
@@ -30,11 +32,13 @@ public class GameManagerP3 : MonoBehaviour
 	IEnumerator StartRoutine()
 	{
 		titleFO.gameObject.SetActive(true);
-		startFO.gameObject.SetActive(true);
+		mainText_01.gameObject.SetActive(true);
 
 		yield return new WaitForSeconds(1f);
 
+		items_01.SetActive(true);
 		titleFO.SetOffObject(2f);
+		mainText_01.moveObject.MovingIn();
 	}
 
 }

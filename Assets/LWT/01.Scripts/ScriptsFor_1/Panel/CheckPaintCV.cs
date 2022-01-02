@@ -9,7 +9,6 @@ public class CheckPaintCV : MonoBehaviour
 	public FadeObject trFadeObject;
 
 	[Header("Button Settings")]
-	public bool nextBtnInteractable;
 	public Button[] textBtns;
 
 	[Header("RandomPos Holder")]
@@ -17,8 +16,6 @@ public class CheckPaintCV : MonoBehaviour
 	public FadeObject[] paints;
 
 	List<FadeObject> onPaints = new List<FadeObject>();
-
-	public bool IsChecked { get; set; } = false;
 
 	private void Awake()
 	{
@@ -32,8 +29,6 @@ public class CheckPaintCV : MonoBehaviour
 
 	private void Update()
 	{
-		if (IsChecked) return;
-
 		int count = 0;
 
 		for (int i = 0; i < paints.Length; i++)
@@ -41,12 +36,8 @@ public class CheckPaintCV : MonoBehaviour
 			if (!paints[i].gameObject.activeInHierarchy) count++;
 		}
 
-		if (count == paints.Length)
-		{ 
-			IsChecked = true;
-			nextBtnInteractable = true;
-			textBtns.ToList().ForEach(x => x.interactable = nextBtnInteractable);
-		}
+		if (count == paints.Length) textBtns.ToList().ForEach(x => x.interactable = true);
+		else textBtns.ToList().ForEach(x => x.interactable = false);
 	}
 
 	private void SetPaints()
@@ -72,8 +63,4 @@ public class CheckPaintCV : MonoBehaviour
 		paints = paint_Holder.GetComponentsInChildren<FadeObject>();
 	}
 
-	public void SetButtonInteract()
-	{
-		textBtns.ToList().ForEach(x => x.interactable = nextBtnInteractable);
-	}
 }

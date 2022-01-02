@@ -81,7 +81,11 @@ public class Item_TapeCV_P1 : ItemCV_P1
 				hitedPipe.state = Pipe_P1.State.Taped;
 
 				if (!IsAllClicked(pipes.tapeLine)) return;
-				CubeMap04_P1.Map4_Txt.text = "수고하셨습니다.\n\n그럼 터보 냉동기 반입을 시작하겠습니다.";
+
+				CubeMap04_P1.RefrigerIn_Btn.interactable = true;
+				CubeMap04_P1.Map4_Txt.text = "수고하셨습니다.\n\n그럼 '냉동기 반입하기' 버튼을 눌러 터보 냉동기 반입을 시작해주세요.";
+
+				this.gameObject.SetActive(false);
 			}
 		}
 	}

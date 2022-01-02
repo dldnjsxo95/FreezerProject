@@ -7,8 +7,6 @@ public class AnyScripts : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            CamManagement.Instance.MoveTo(TargetTag.Turbo_RefrigCondenser);
 
     }
 

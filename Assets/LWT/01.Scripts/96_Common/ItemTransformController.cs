@@ -14,6 +14,9 @@ public class ItemTransformController : MonoBehaviour
 
 	float sizeValue;
 
+	Vector3 mPosDelta;
+	Vector3 mPrevPos;
+
 	private void Start()
 	{
 		sizeValue = transform.localScale.x;
@@ -22,19 +25,31 @@ public class ItemTransformController : MonoBehaviour
 	private void Update()
 	{
 		// Size Controller
-		sizeValue += Input.GetAxis("Mouse ScrollWheel") * sizeSensitivity ;
+		sizeValue += Input.GetAxis("Mouse ScrollWheel") * sizeSensitivity;
 		sizeValue = Mathf.Clamp(sizeValue, sMin, sMax);
 
 		transform.localScale = Vector3.one * sizeValue;
 
 		// RotateController
-		if(Input.GetMouseButton(0))
+		if (Input.GetMouseButton(0))
 		{
-			float mouseX = Input.GetAxisRaw("Mouse X") * rotateSensitivity;
-			float mouseY = Input.GetAxisRaw("Mouse Y") * rotateSensitivity;
+			mPosDelta = Input.mousePosition - mPrevPos;
 
-			transform.rotation *= Quaternion.AngleAxis(mouseX, -Vector3.up);
-			transform.rotation *= Quaternion.AngleAxis(mouseY, Vector3.right);
+			mPosDelta *= rotateSensitivity;
+
+			if (Vector3.Dot(transform.up, Vector3.up) >= 0)
+			{
+				transform.Rotate(transform.up, -Vector3.Dot(mPosDelta, Camera.main.transform.right), Space.World);
+			}
+			else
+			{
+				transform.Rotate(transform.up, Vector3.Dot(mPosDelta, Camera.main.transform.right), Space.World);
+			}
+
+			transform.Rotate(Camera.main.transform.right, Vector3.Dot(mPosDelta, Camera.main.transform.up), Space.World);
+
 		}
+
+		mPrevPos = Input.mousePosition;
 	}
 }

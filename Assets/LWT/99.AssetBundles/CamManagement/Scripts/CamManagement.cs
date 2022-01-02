@@ -6,15 +6,12 @@ using DG.Tweening;
 public enum TargetTag
 {
 	NoneUse,
-	Turbo_RefrigCondenser,
-	Turbo_CoolingWater,
-	Turbo_HoleWaterEnter,
-	Turbo_PreEvaporator,
-	Turbo_Evaporator,
-	Turbo_EvaporatorWater,
-	Turbo_Compressor,
-	Turbo_CompressorVane,
-	Turbo_MenuCanvas,
+	LookForward,
+	LookAtMoveToTurboBtn,
+	MoveToTurbo,
+	MoveToImpeller,
+	MoveToImpeller_2,
+	MoveToDiffuser_1,
 }
 
 
@@ -26,14 +23,13 @@ public class CamManagement : MonoBehaviour
 	public Ease moveStyle;
 	public Transform player;
 	public Transform playerCam;
-	public MainTextBox mainTextBox;
 	[Tooltip("Time it takes arrive to target")]
 	public float duration = 2f;
 
 	[Header("Target Setting")]
 	public List<CamTarget> camTargets = new List<CamTarget>();
 
-	public bool IsFinishCamMove { get; set; }
+	public bool IsFinishCamMove { get; set; } = true;
 	public bool IsRotate { get; set; } = false;
 
 	Coroutine moveRoutine;
@@ -46,6 +42,28 @@ public class CamManagement : MonoBehaviour
 			Instance = this;
 		}
 		else Destroy(gameObject);
+	}
+
+	CamTarget SearchTarget(TargetTag targetTag)
+	{
+		for (int i = 0; i < camTargets.Count; i++)
+		{
+			if (camTargets[i].targetTag == targetTag)
+				return camTargets[i];
+		}
+
+		return null;
+	}
+
+	CamTarget SearchTarget(string targetName)
+	{
+		for (int i = 0; i < camTargets.Count; i++)
+		{
+			if (camTargets[i].name == targetName)
+				return camTargets[i];
+		}
+
+		return null;
 	}
 
 	public void MoveTo(TargetTag targetTag)
@@ -68,15 +86,17 @@ public class CamManagement : MonoBehaviour
 
 	}
 
-	CamTarget SearchTarget(TargetTag targetTag)
+	public void MoveTo(string targetName)
 	{
-		for (int i = 0; i < camTargets.Count; i++)
+		CamTarget curTarget = SearchTarget(targetName);
+
+		if (moveRoutine != null)
 		{
-			if (camTargets[i].targetTag == targetTag)
-				return camTargets[i];
+			StopCoroutine(moveRoutine);
+			moveRoutine = null;
 		}
 
-		return null;
+		moveRoutine = StartCoroutine(MoveRoutine(curTarget));
 	}
 
 	IEnumerator MoveRoutine(CamTarget curTarget)
@@ -88,11 +108,15 @@ public class CamManagement : MonoBehaviour
 
 		float angleOffSet = Vector3.Angle(playerCam.forward, curTarget.playerLookAtPos.position - playerCam.position);
 
-		while (angleOffSet > 0.01f)
+		float currentTime = 0;
+
+		while (angleOffSet > 0.1f || currentTime < 1.5f)
 		{
 			angleOffSet = Vector3.Angle(playerCam.forward, curTarget.playerLookAtPos.position - playerCam.position);
 
-			playerCam.forward = Vector3.Lerp(playerCam.forward, curTarget.playerLookAtPos.position - playerCam.position, Time.deltaTime / 2);
+			playerCam.forward = Vector3.Lerp(playerCam.forward, 5 * (curTarget.playerLookAtPos.position - playerCam.position).normalized, Time.deltaTime / 2);
+
+			currentTime += Time.deltaTime;
 
 			yield return null;
 		}
@@ -100,41 +124,41 @@ public class CamManagement : MonoBehaviour
 		IsFinishCamMove = true;
 	}
 
-	public void MoveRound(string name)
-	{
-		if (moveRoundRoutine != null)
-		{
-			StopCoroutine(moveRoundRoutine);
-			moveRoundRoutine = null;
-		}
+	//public void MoveRound(string name)
+	//{
+	//	if (moveRoundRoutine != null)
+	//	{
+	//		StopCoroutine(moveRoundRoutine);
+	//		moveRoundRoutine = null;
+	//	}
 
-		switch (name)
-		{
-			case "MoveToEvaporate":
-				if(mainTextBox.TxtIds - mainTextBox.PreTxtIds == 1)
-				{
-					moveRoundRoutine = StartCoroutine(MoveRoundRoutine(TargetTag.Turbo_PreEvaporator, TargetTag.Turbo_Evaporator));
-				}
-				else if(mainTextBox.TxtIds - mainTextBox.PreTxtIds == -1)
-				{
-					MoveTo(TargetTag.Turbo_Evaporator);
-				}
-				break;
+	//	switch (name)
+	//	{
+	//		case "MoveToEvaporate":
+	//			if(mainTextBox.TxtIds - mainTextBox.PreTxtIds == 1)
+	//			{
+	//				moveRoundRoutine = StartCoroutine(MoveRoundRoutine(TargetTag.Turbo_PreEvaporator, TargetTag.Turbo_Evaporator));
+	//			}
+	//			else if(mainTextBox.TxtIds - mainTextBox.PreTxtIds == -1)
+	//			{
+	//				MoveTo(TargetTag.Turbo_Evaporator);
+	//			}
+	//			break;
 
-			case "MoveToHoleWaterEnter":
-				print(mainTextBox.TxtIds - mainTextBox.PreTxtIds);
-				if (mainTextBox.TxtIds - mainTextBox.PreTxtIds == 1)
-				{
-					MoveTo(TargetTag.Turbo_HoleWaterEnter);
-				}
-				else if (mainTextBox.TxtIds - mainTextBox.PreTxtIds == -1)
-				{
-					print("Active");
-					moveRoundRoutine = StartCoroutine(MoveRoundRoutine(TargetTag.Turbo_PreEvaporator, TargetTag.Turbo_HoleWaterEnter));
-				}
-				break;
-		}
-	}
+	//		case "MoveToHoleWaterEnter":
+	//			print(mainTextBox.TxtIds - mainTextBox.PreTxtIds);
+	//			if (mainTextBox.TxtIds - mainTextBox.PreTxtIds == 1)
+	//			{
+	//				MoveTo(TargetTag.Turbo_HoleWaterEnter);
+	//			}
+	//			else if (mainTextBox.TxtIds - mainTextBox.PreTxtIds == -1)
+	//			{
+	//				print("Active");
+	//				moveRoundRoutine = StartCoroutine(MoveRoundRoutine(TargetTag.Turbo_PreEvaporator, TargetTag.Turbo_HoleWaterEnter));
+	//			}
+	//			break;
+	//	}
+	//}
 
 	IEnumerator MoveRoundRoutine(TargetTag targetTag1, TargetTag targetTag2)
 	{

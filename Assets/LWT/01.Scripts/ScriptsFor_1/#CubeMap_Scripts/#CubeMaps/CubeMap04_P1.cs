@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 
-
 public class CubeMap04_P1 : CubeMap_P1
 {
 	[Header("Button Settings")]
 	public Button instPreview_Btn;
 	public Button groundInstall_Btn;
+	public Button refrigerIn_Btn;
 	public Button close_Btn;
 
 	[Header("Ground Inst Setting")]
@@ -19,8 +19,9 @@ public class CubeMap04_P1 : CubeMap_P1
 	public CV[] cvs;
 
 	[Header("Text Setting")]
-	public Text map4_Txt;
+	public MainTextBox mainTextBox;
 
+	public static Button RefrigerIn_Btn { get; set; }
 	public static Button GroundInstall_Btn { get; set; }
 	public static Text Map4_Txt { get; set; }
 
@@ -28,13 +29,16 @@ public class CubeMap04_P1 : CubeMap_P1
 	{
 		instPreview_Btn.enabled = true;
 		groundInstall_Btn.interactable = false;
+		refrigerIn_Btn.interactable = false;
 
 		instPreview_Btn.onClick.AddListener(OnClickInstPreviewBtn);
 		groundInstall_Btn.onClick.AddListener(OnClickGroundIstBtn);
+		refrigerIn_Btn.onClick.AddListener(OnClickRefrigerInBtn);
 		close_Btn.onClick.AddListener(OnClickCloseBtn);
 
 		GroundInstall_Btn = groundInstall_Btn;
-		Map4_Txt = map4_Txt;
+		RefrigerIn_Btn = refrigerIn_Btn;
+		Map4_Txt = mainTextBox.textBox.textBox_Txt;
 
 		Map4_Txt.text = "시공을 진행하기 위해 설치 검토를 진행합니다.";
 	}
@@ -68,6 +72,16 @@ public class CubeMap04_P1 : CubeMap_P1
 		SetActiveCV(CVTag.TableObjects);
 	}
 
+	public void OnClickRefrigerInBtn()
+	{
+		Player.DisableAllScripts();
+
+		CamManagement_P1.Instance.MoveTo(TargetTag_P1.RefrigerIn);
+
+		mainTextBox.textBox.enabled = true;
+		mainTextBox.SetBtnsActive(true);
+	}
+
 	public void OnClickCloseBtn()
 	{
 		Player.EnableScripts(new PlayerScriptTag[] { PlayerScriptTag.CamRotate });
@@ -82,16 +96,16 @@ public class CubeMap04_P1 : CubeMap_P1
 		switch (GroundInstall_CV_P1.state)
 		{
 			case (int)ItemTag_P1.Aligner:
-				map4_Txt.text = "냉동기를 시공하기 전 가장 먼저 바닥의 수평을 확인해 보겠습니다.\n\n'바닥 시공하기 버튼'을 선택해주세요.";
+				Map4_Txt.text = "냉동기를 시공하기 전 가장 먼저 바닥의 수평을 확인해 보겠습니다.\n\n'바닥 시공하기 버튼'을 선택해주세요.";
 				break;
 			case (int)ItemTag_P1.Rubber:
-				map4_Txt.text = "수평이 맞췄다면 냉동기를 설치 하기 전 방진대비를 해야 합니다.\n\n'바닥 시공하기'를 클릭해주세요.";
+				Map4_Txt.text = "수평이 맞췄다면 냉동기를 설치 하기 전 방진대비를 해야 합니다.\n\n'바닥 시공하기'를 클릭해주세요.";
 				break;
 			case (int)ItemTag_P1.Spring:
-				map4_Txt.text = "방진 고무 설치가 완료되었다면, 방진 스프링 까지 설치하여 방진 시공을 마무리합니다.\n\n'바닥 시공하기'를 클릭해주세요.";
+				Map4_Txt.text = "방진 고무 설치가 완료되었다면, 방진 스프링 까지 설치하여 방진 시공을 마무리합니다.\n\n'바닥 시공하기'를 클릭해주세요.";
 				break;
 			case (int)ItemTag_P1.Tape:
-				map4_Txt.text = "방진 스프링 설치가 완료되었다면 천장과 터보냉동기를 연결하는 천장 드래드 라인을 설치해보겠습니다.\n\n'바닥 시공하기 버튼'을 선택해주세요.";
+				Map4_Txt.text = "방진 스프링 설치가 완료되었다면 천장과 터보냉동기를 연결하는 천장 드래드 라인을 설치해보겠습니다.\n\n'바닥 시공하기 버튼'을 선택해주세요.";
 				break;
 		}
 
@@ -113,7 +127,26 @@ public class CubeMap04_P1 : CubeMap_P1
 		cvs.ToList().ForEach(x => x.gameObject.SetActive(false));
 	}
 
-	public enum CVTag { InstPreview, TableObjects, Aligner, Rubber, Spring, Tape }
+	[System.Serializable]
+	public class MainTextBox
+	{
+		public TextBox_P1 textBox;
+		public GameObject backGround;
+		public GameObject[] contentsBtns;
+
+		public void SetBackGroundActive(bool value)
+		{
+			backGround.SetActive(value);
+		}
+
+		public void SetBtnsActive(bool value)
+		{
+			contentsBtns.ToList().ForEach(x => x.SetActive(value));
+		}
+
+	}
+
+	public enum CVTag { InstPreview, TableObjects, Aligner, Rubber, Spring, Tape, RefrigerRoute }
 	[System.Serializable]
 	public class CV
 	{
