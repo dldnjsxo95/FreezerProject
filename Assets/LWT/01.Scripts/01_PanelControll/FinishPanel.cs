@@ -18,7 +18,7 @@ public class FinishPanel : MonoBehaviour
 
     public void OnClickRestartBtn()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        LoadingSceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void OnClickExitBtn()

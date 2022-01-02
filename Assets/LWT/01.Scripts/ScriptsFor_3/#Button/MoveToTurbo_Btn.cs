@@ -29,7 +29,7 @@ public class MoveToTurbo_Btn : MonoBehaviour
 		mainTxt_nextBtn.interactable = true;
 		this.gameObject.SetActive(false);
 
-		CamManagement.Instance.MoveTo(TargetTag.MoveToTurbo);
+		CamManagement.Instance.MoveTo("MoveToTurbo");
 		// 압축기_2
 		textBox_P3.textBox_Txt.text = "지급 보시는 압축기(compressor)는 냉동기를 구동하는 동력원으로서 냉동 사이클 내 냉매를 순환시키는 중요한 역할을 합니다.";
 

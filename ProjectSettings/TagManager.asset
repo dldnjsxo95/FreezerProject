@@ -12,6 +12,9 @@ TagManager:
   - Item
   - AlignerCheckBox
   - Pipe
+  - AccumDirty
+  - BallTop_Old
+  - BallTop_Box
   layers:
   - Default
   - TransparentFX

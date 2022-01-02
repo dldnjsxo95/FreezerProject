@@ -52,6 +52,8 @@ namespace UltimateCameraController.Cameras.Controllers
 		//This way we can avoid glitches
 		private void LateUpdate()
 		{
+			if (CamManagement.Instance != null && !CamManagement.Instance.IsFinishCamMove) return;
+
 			//We do an error check
 			if (targetObject == null)
 			{

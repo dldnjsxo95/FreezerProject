@@ -30,8 +30,8 @@ public class CamRotate : PlayerScript
 	{
 		if (!Input.GetMouseButton((int)mouseInput)) return;
 
-		if (state == State.process3 && !CamManagement.Instance.IsFinishCamMove) return;
-		else if (state == State.process1 && !CamManagement_P1.Instance.IsFinishCamMove) return;
+		if (CamManagement.Instance != null && state == State.process3 && !CamManagement.Instance.IsFinishCamMove) return;
+		else if (CamManagement_P1.Instance != null && state == State.process1 && !CamManagement_P1.Instance.IsFinishCamMove) return;
 
 		float mouseX = Input.GetAxis("Mouse X");
 		float mouseY = Input.GetAxis("Mouse Y");

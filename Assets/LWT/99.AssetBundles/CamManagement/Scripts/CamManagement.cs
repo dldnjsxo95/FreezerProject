@@ -33,6 +33,7 @@ public class CamManagement : MonoBehaviour
 	public float duration = 2f;
 
 	[Header("Target Setting")]
+	public Transform positionSetting;
 	public List<CamTarget> camTargets = new List<CamTarget>();
 
 	public bool IsFinishCamMove { get; set; } = true;
@@ -50,17 +51,6 @@ public class CamManagement : MonoBehaviour
 		else Destroy(gameObject);
 	}
 
-	CamTarget SearchTarget(TargetTag targetTag)
-	{
-		for (int i = 0; i < camTargets.Count; i++)
-		{
-			if (camTargets[i].targetTag == targetTag)
-				return camTargets[i];
-		}
-
-		return null;
-	}
-
 	CamTarget SearchTarget(string targetName)
 	{
 		for (int i = 0; i < camTargets.Count; i++)
@@ -70,26 +60,6 @@ public class CamManagement : MonoBehaviour
 		}
 
 		return null;
-	}
-
-	public void MoveTo(TargetTag targetTag)
-	{
-		CamTarget curTarget = SearchTarget(targetTag);
-
-		if (curTarget == null)
-		{
-			Debug.Log($"There is No Target.tag == {targetTag}");
-			return;
-		}
-
-		if (moveRoutine != null)
-		{
-			StopCoroutine(moveRoutine);
-			moveRoutine = null;
-		}
-
-		moveRoutine = StartCoroutine(MoveRoutine(curTarget));
-
 	}
 
 	public void MoveTo(string targetName)
@@ -136,59 +106,35 @@ public class CamManagement : MonoBehaviour
 		IsFinishCamMove = true;
 	}
 
-	//public void MoveRound(string name)
-	//{
-	//	if (moveRoundRoutine != null)
-	//	{
-	//		StopCoroutine(moveRoundRoutine);
-	//		moveRoundRoutine = null;
-	//	}
-
-	//	switch (name)
-	//	{
-	//		case "MoveToEvaporate":
-	//			if(mainTextBox.TxtIds - mainTextBox.PreTxtIds == 1)
-	//			{
-	//				moveRoundRoutine = StartCoroutine(MoveRoundRoutine(TargetTag.Turbo_PreEvaporator, TargetTag.Turbo_Evaporator));
-	//			}
-	//			else if(mainTextBox.TxtIds - mainTextBox.PreTxtIds == -1)
-	//			{
-	//				MoveTo(TargetTag.Turbo_Evaporator);
-	//			}
-	//			break;
-
-	//		case "MoveToHoleWaterEnter":
-	//			print(mainTextBox.TxtIds - mainTextBox.PreTxtIds);
-	//			if (mainTextBox.TxtIds - mainTextBox.PreTxtIds == 1)
-	//			{
-	//				MoveTo(TargetTag.Turbo_HoleWaterEnter);
-	//			}
-	//			else if (mainTextBox.TxtIds - mainTextBox.PreTxtIds == -1)
-	//			{
-	//				print("Active");
-	//				moveRoundRoutine = StartCoroutine(MoveRoundRoutine(TargetTag.Turbo_PreEvaporator, TargetTag.Turbo_HoleWaterEnter));
-	//			}
-	//			break;
-	//	}
-	//}
-
-	IEnumerator MoveRoundRoutine(TargetTag targetTag1, TargetTag targetTag2)
+	[ContextMenu("SetTarget")]
+	public void SetTarget()
 	{
-		MoveTo(targetTag1);
+		camTargets.Clear();
 
-		yield return new WaitForSeconds(1.4f);
+		for (int i = 0; i < positionSetting.childCount; i++)
+		{
+			string name = positionSetting.GetChild(i).name;
+			Transform camPos = positionSetting.GetChild(i).GetChild(0);
+			Transform lookPos = positionSetting.GetChild(i).GetChild(1);
 
-		MoveTo(targetTag2);
+			camTargets.Add(new CamTarget(name, camPos, lookPos));
+		}
 	}
-
 
 	[System.Serializable]
 	public class CamTarget
 	{
 		public string name;
-		public TargetTag targetTag;
 		public Transform playerArrivePos;
 		public Transform playerLookAtPos;
+
+		public CamTarget(string name, Transform camPos, Transform lookPos)
+		{
+			this.name = name;
+			playerArrivePos = camPos;
+			playerLookAtPos = lookPos;
+		}
+
 	}
 }
 

@@ -95,9 +95,6 @@ public class MainTextBox : MonoBehaviour
 
 		contents[TxtIds].onClick.Invoke();
 
-		if (CamManagement.Instance != null)
-			CamManagement.Instance.MoveTo(contents[TxtIds].targetTag);
-
 		PreTxtIds = TxtIds;
 	}
 
@@ -149,7 +146,6 @@ public class MainTextBox : MonoBehaviour
 	public class Content
 	{
 		public string name;
-		public TargetTag targetTag;
 		[TextArea(5, 10)]
 		public string text;
 		public Activation activation;
