@@ -14,6 +14,8 @@ public class MoveToTurbo_Btn : MonoBehaviour
 
 	[Header("ChangeMat Setting")]
 	public EnableController compMatFadeEnable;
+	public EnableController compOutlineEnable;
+	public EnableController compBodyFadeEnable;
 
 	bool isClicked;
 
@@ -33,6 +35,8 @@ public class MoveToTurbo_Btn : MonoBehaviour
 
 		// 압축기의 Mat을 바꿔준다.
 		compMatFadeEnable.gameObject.SetActive(true);
+		compOutlineEnable.gameObject.SetActive(true);
+		compBodyFadeEnable.gameObject.SetActive(true);
 	}
 
 	public void DisableNextBtn()

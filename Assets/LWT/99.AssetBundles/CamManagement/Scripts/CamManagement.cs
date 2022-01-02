@@ -12,6 +12,12 @@ public enum TargetTag
 	MoveToImpeller,
 	MoveToImpeller_2,
 	MoveToDiffuser_1,
+	MoveToVain_1,
+	MoveToLiquidComp_1,
+	MoveToCompArrows_1,
+	MoveToScreen_1,
+	MoveToAccumulators_1,
+	MoveToAccumulators_2,
 }
 
 
@@ -89,6 +95,12 @@ public class CamManagement : MonoBehaviour
 	public void MoveTo(string targetName)
 	{
 		CamTarget curTarget = SearchTarget(targetName);
+
+		if (curTarget == null)
+		{
+			Debug.Log($"There is No Target.tag == {targetName}");
+			return;
+		}
 
 		if (moveRoutine != null)
 		{

@@ -12,6 +12,7 @@ public class TextBox_P3 : MonoBehaviour
 	public Button nextBtn;
 
 	[Header("Item Setting")]
+	public Transform itemsHolder;
 	public GameObject[] items;
 
 	[Header("Contents Setting")]
@@ -48,6 +49,8 @@ public class TextBox_P3 : MonoBehaviour
 		moveObject = GetComponent<MoveObject>();
 		fadeObject = GetComponent<FadeObject>();
 
+		SetItems();
+
 		TxtIdx = 0;
 	}
 
@@ -56,27 +59,37 @@ public class TextBox_P3 : MonoBehaviour
 		ContentsEvent(TxtIdx);
 	}
 
+	[ContextMenu("SetItems")]
+	public void SetItems()
+	{
+		items = new GameObject[itemsHolder.childCount];
+
+		for (int i = 0; i < itemsHolder.childCount; i++)
+		{
+			items[i] = itemsHolder.GetChild(i).gameObject;
+		}
+	}
+
+
 	public void OnClickNextBtn() => ContentsEvent(TxtIdx++);
 	public void OnClickPrevBtn() => ContentsEvent(TxtIdx--);
 	private void ContentsEvent(int txtIdx)
 	{
 		textBox_Txt.text = contents[TxtIdx].text;
 
-		ActiveItem(contents[TxtIdx].activeItems);
+		ActiveItem(contents[TxtIdx].activeItemGameObjects);
 
 		contents[TxtIdx].onClick.Invoke();
 	}
-	private void ActiveItem(string[] itemNames)
+	private void ActiveItem(GameObject[] itemGOs)
 	{
-		itemNames.ToList().ForEach(x => x = x.Replace(" ", string.Empty));
-
 		foreach (GameObject item in items)
 		{
 			bool isContained = false;
 
-			for (int i = 0; i < itemNames.Length; i++)
+			for (int i = 0; i < itemGOs.Length; i++)
 			{
-				if (item.name == itemNames[i])
+				if (item == itemGOs[i])
 				{
 					isContained = true;
 					break;
@@ -96,7 +109,7 @@ public class TextBox_P3 : MonoBehaviour
 		[TextArea(5, 10)]
 		public string text;
 
-		public string[] activeItems;
+		public GameObject[] activeItemGameObjects;
 
 		public UnityEvent onClick;
 	}

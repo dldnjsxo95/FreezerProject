@@ -5,7 +5,7 @@ using UnityEngine;
 public class ItemTransformController : MonoBehaviour
 {
 	[Header("Size Setting")]
-	[Range(1, 3)] public float sizeSensitivity = 1f;
+	[Range(0, 3)] public float sizeSensitivity = 1f;
 	public float sMin = 2f;
 	public float sMax = 4f;
 
@@ -35,18 +35,17 @@ public class ItemTransformController : MonoBehaviour
 		{
 			mPosDelta = Input.mousePosition - mPrevPos;
 
-			mPosDelta *= rotateSensitivity;
+			mPosDelta.Normalize();
 
-			if (Vector3.Dot(transform.up, Vector3.up) >= 0)
-			{
-				transform.Rotate(transform.up, -Vector3.Dot(mPosDelta, Camera.main.transform.right), Space.World);
-			}
-			else
-			{
-				transform.Rotate(transform.up, Vector3.Dot(mPosDelta, Camera.main.transform.right), Space.World);
-			}
+			bool isTrSameUp = Vector3.Dot(transform.up, Vector3.up) >= 0;
+			bool isCamSameRight = Vector3.Dot(Camera.main.transform.right, Vector3.right) >= 0;
 
-			transform.Rotate(Camera.main.transform.right, Vector3.Dot(mPosDelta, Camera.main.transform.up), Space.World);
+			if (isTrSameUp && !isCamSameRight || !isTrSameUp && isCamSameRight)
+				transform.Rotate(transform.up, rotateSensitivity * Vector3.Dot(mPosDelta, Camera.main.transform.right), Space.World);
+			else if (isTrSameUp && isCamSameRight || !isTrSameUp && !isCamSameRight)
+				transform.Rotate(transform.up, -rotateSensitivity * Vector3.Dot(mPosDelta, Camera.main.transform.right), Space.World);
+
+			transform.Rotate(Camera.main.transform.right, rotateSensitivity * Vector3.Dot(mPosDelta, Camera.main.transform.up), Space.World);
 
 		}
 
